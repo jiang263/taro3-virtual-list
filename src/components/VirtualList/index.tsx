@@ -238,10 +238,14 @@ export default class VirtialList extends Component<VirtualListProps, VirtualList
     const { scrollViewProps, listId, screenNum } = this.props
     // 以传入的scrollView的高度为相交区域的参考边界，若没传，则默认使用屏幕高度
     const scrollHeight = scrollViewProps?.style?.height || this.windowHeight
+
     const observer = Taro.createIntersectionObserver(this.currentPage.page).relativeToViewport({
+      // @ts-ignore
       top: screenNum * scrollHeight,
+      // @ts-ignore
       bottom: screenNum * scrollHeight,
     })
+
     observer.observe(`#${listId} .wrap_${wholePageIndex}`, (res) => {
       const { twoList } = this.state
       if (res?.intersectionRatio <= 0) {
@@ -294,6 +298,8 @@ export default class VirtialList extends Component<VirtualListProps, VirtualList
       ...scrollViewProps,
       scrollTop: autoScrollTop ? (innerScrollTop === 0 ? 0 : "") : scrollViewProps?.scrollTop,
     }
+
+    console.log(this.pageHeightArr)
 
     return (
       <ScrollView

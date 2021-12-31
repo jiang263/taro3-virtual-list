@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { View } from '@tarojs/components'
-import ZtVirtualList from '../../components/VirtualList'
+// import ZtVirtualList from '../../components/VirtualList'
+import ZtVirtualList from '../../components/virtualList-hook'
 
 import './index.scss'
 
@@ -48,10 +49,16 @@ export default function Demo(): JSX.Element {
     })
     let _list = [...list]
     _list = _list.concat(arr)
+
     setTimeout(() => {
+      setPageNum(pageNum + 1)
+
       setList(_list)
     }, 1000)
-    setPageNum(pageNum + 1)
+
+
+    console.log('*************************************触底')
+
   }
   const handleRenderLoad = () => {
     return '数据载入中...'
